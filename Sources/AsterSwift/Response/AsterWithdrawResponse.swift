@@ -6,5 +6,5 @@
 //
 import Foundation
 public struct AsterWithdrawResponse: Decodable{
-    public let hash: String
+    public let hash: String?
 }
