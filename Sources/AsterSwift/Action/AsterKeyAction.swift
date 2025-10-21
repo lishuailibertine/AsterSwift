@@ -11,13 +11,15 @@ public struct AsterKeyAction: AsterBaseAction {
     public var address: String
     public var desc: String
     public var timestamp: Int
+    public var keyId: Int?
     public var network: String?
-    public init(userOperationType: String, userSignature: String, address: String, desc: String, network: String?) {
+    public init(userOperationType: String, userSignature: String, address: String, desc: String, network: String?, keyId: Int?) {
         self.userOperationType = userOperationType
         self.userSignature = userSignature
         self.address = address
         self.desc = desc
         self.network = network
+        self.keyId = keyId
         self.timestamp = Int(Date().timeIntervalSince1970 * 1000)
     }
 }
