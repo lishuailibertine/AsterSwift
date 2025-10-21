@@ -65,7 +65,12 @@ public class AsterKeyExchange{
         return response.data
     }
     
-    public func positionSide(action: AsterPositionSideAction = AsterPositionSideAction()) async throws -> AsterResponseResultOrError<AsterPositionSide> {
+    public func positionSide(action: AsterPositionSideAction = AsterPositionSideAction()) async throws -> AsterPositionSide {
+        let param = try action.payload()
+        return try await self._getAction(request: [:], url: url, path: "/fapi/v1/positionSide/dual?\(queryString(payload: param))")
+    }
+    
+    public func positionSideWithError(action: AsterPositionSideAction = AsterPositionSideAction()) async throws -> AsterResponseResultOrError<AsterPositionSide> {
         let param = try action.payload()
         return try await self._getAction(request: [:], url: url, path: "/fapi/v1/positionSide/dual?\(queryString(payload: param))")
     }
