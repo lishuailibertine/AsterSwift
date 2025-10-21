@@ -9,7 +9,7 @@ public struct AsterDAPPResponse<T: Decodable>: Decodable {
 }
 public struct AsterResponseError: Decodable {
     public let code: Int
-    public let msg: String
+    public let msg: String?
 }
 
 public enum AsterResponseResultOrError<T: Decodable>: Decodable {
