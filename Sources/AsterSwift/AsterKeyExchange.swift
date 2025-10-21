@@ -22,6 +22,16 @@ public class AsterKeyExchange{
         self.apiSecret = apiSecret
     }
 
+    public func getNonce(action: AsterGetNonce) async throws -> Int {
+        let param = try action.payload()
+        return try await self._postAction(request: param, url: sUrl, path: "/api/v1/getNonce", encoding: URLEncoding.default)
+    }
+    
+    public func creatKey(action: AsterKeyAction) async throws -> AsterCreateApiKeyResponse {
+        let param = try action.payload()
+        return try await self._postAction(request: param, url: sUrl, path: "/api/v1/createApiKey", encoding: URLEncoding.default)
+    }
+    
     public func exchangeInfo() async throws -> AsterExchangeInfo {
         return try await self._getAction(request: [:], url: url, path: "/fapi/v1/exchangeInfo")
     }

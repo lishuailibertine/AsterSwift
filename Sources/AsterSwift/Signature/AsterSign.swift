@@ -12,6 +12,7 @@ import CryptoSwift
 import BIP39swift
 import BIP32Swift
 import BigInt
+import SolanaSwift
 public enum AsterSignError: Error {
     case invalidPrivateData
     case invalidPublicData
@@ -39,6 +40,16 @@ public struct AsterKeychain{
             throw AsterSignError.signError
         }
         return retrunSignature
+    }
+}
+
+public struct AsterSOLKeychain{
+    public var secretKey: Data
+    public init(secretKey: Data) throws {
+        self.secretKey = secretKey
+    }
+    func signMessage(raw: Data) throws -> SolanaSignature {
+        return SolanaSignature(data: try SolanaKeyPair(secretKey: self.secretKey).signDigest(messageDigest: raw))
     }
 }
 
