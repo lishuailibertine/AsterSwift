@@ -14,7 +14,7 @@ public class AsterKeyExchange{
     public let apiSecret: String
     public init(url: String = "https://fapi.asterdex.com",
                 dappUrl: String = "https://www.asterdex.com",
-                sUrl: String = "https://sapi.asterdex.com", apikey: String, apiSecret: String) {
+                sUrl: String = "https://sapi.asterdex.com", apikey: String = "*", apiSecret: String = "*") {
         self.url = url
         self.dappUrl = dappUrl
         self.sUrl = sUrl

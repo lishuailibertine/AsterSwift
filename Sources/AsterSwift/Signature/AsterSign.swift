@@ -48,7 +48,7 @@ public struct AsterSOLKeychain{
     public init(secretKey: Data) throws {
         self.secretKey = secretKey
     }
-    func signMessage(raw: Data) throws -> SolanaSignature {
+    public func signMessage(_ raw: Data) throws -> SolanaSignature {
         return SolanaSignature(data: try SolanaKeyPair(secretKey: self.secretKey).signDigest(messageDigest: raw))
     }
 }
