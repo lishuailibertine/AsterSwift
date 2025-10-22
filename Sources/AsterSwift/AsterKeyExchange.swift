@@ -22,6 +22,16 @@ public class AsterKeyExchange{
         self.apiSecret = apiSecret
     }
 
+    public func depositAddress(chainId: Int) async throws -> String {
+        let response: AsterDAPPResponse<String> = try await self._getAction(request: [:], url: dappUrl, path: "/bapi/futures/v1/public/future/web3/ae/deposit-address?\(queryString(payload: ["chainId": chainId], sign: false))")
+        return response.data
+    }
+    
+    public func depositAssets(chainIds: String, networks: String, accountType: String = "perp") async throws -> [AsterSolTokenInfo]{
+        let response: AsterDAPPResponse<[AsterSolTokenInfo]> = try await self._getAction(request: [:], url: dappUrl, path: "/bapi/futures/v1/public/future/aster/deposit/assets?\(queryString(payload: ["chainIds": chainIds, "networks": networks, "accountType": accountType], sign: false))")
+        return response.data
+    }
+    
     public func getNonce(action: AsterGetNonce) async throws -> Int {
         let param = try action.payload()
         return try await self._postAction(request: param, url: sUrl, path: "/api/v1/getNonce", encoding: URLEncoding.default)
