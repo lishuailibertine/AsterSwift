@@ -7,25 +7,25 @@
 import Foundation
 // 每个 token 的信息
 public struct AsterSolTokenInfo: Decodable {
-    let name: String
-    let displayName: String
-    let contractAddress: String
-    let decimals: Int
-    let network: String
-    let chainId: Int
-    let depositType: String
-    let rank: Int
-    let isNative: Bool
-    let admin: String?
-    let bank: String?
-    let tokenVaultAuthority: String?
-    let tokenVault: String?
-    let tokenMint: String
-    let associatedTokenProgram: String
-    let tokenProgram: String
-    let systemProgram: String
-    let ixSysvar: String
-    let priceFeed: String?
-    let priceFeedProgram: String
-    let solVault: String?
+    public let name: String
+    public let displayName: String
+    public let contractAddress: String
+    public let decimals: Int
+    public let network: String
+    public let chainId: Int
+    public let depositType: String
+    public let rank: Int
+    public let isNative: Bool
+    public let admin: String?
+    public let bank: String?
+    public let tokenVaultAuthority: String?
+    public let tokenVault: String?
+    public let tokenMint: String
+    public let associatedTokenProgram: String
+    public let tokenProgram: String
+    public let systemProgram: String
+    public let ixSysvar: String
+    public let priceFeed: String?
+    public let priceFeedProgram: String
+    public let solVault: String?
 }
