@@ -27,8 +27,15 @@ public class AsterKeyExchange{
         return response.data
     }
     
-    public func depositAssets(chainIds: String, networks: String, accountType: String = "perp") async throws -> [AsterSolTokenInfo]{
-        let response: AsterDAPPResponse<[AsterSolTokenInfo]> = try await self._getAction(request: [:], url: dappUrl, path: "/bapi/futures/v1/public/future/aster/deposit/assets?\(queryString(payload: ["chainIds": chainIds, "networks": networks, "accountType": accountType], sign: false))")
+    public func depositAssets(chainIds: String? = nil, networks: String, accountType: String = "perp") async throws -> [AsterSolTokenInfo]{
+        var payload: [String: String] = [
+            "networks": networks,
+            "accountType": accountType
+        ]
+        if let chainIds, !chainIds.isEmpty {
+            payload["chainIds"] = chainIds
+        }
+        let response: AsterDAPPResponse<[AsterSolTokenInfo]> = try await self._getAction(request: [:], url: dappUrl, path: "/bapi/futures/v1/public/future/aster/deposit/assets?\(queryString(payload: payload, sign: false))")
         return response.data
     }
     
