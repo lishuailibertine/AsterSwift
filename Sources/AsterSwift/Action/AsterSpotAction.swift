@@ -7,7 +7,7 @@
 import Foundation
 import web3swift
 
-public struct AsterSpotAction: AsterBaseAction {
+public struct AsterWithDrawAction: AsterBaseAction {
     public var amount: String
     public var asset: String
     public var chainId: Int
