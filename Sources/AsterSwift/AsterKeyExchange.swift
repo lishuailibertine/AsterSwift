@@ -142,7 +142,7 @@ public class AsterKeyExchange{
         return try await self._postAction(request: param, url: sUrl, path: "/api/v1/aster/user-withdraw")
     }
     
-    public func withdraw_fapi(model: AsterWithdrawModel, onRequestReady: ((AsterWithdrawModel) throws -> Data)) async throws -> AsterWithdrawResponse {
+    public func withdraw_fapi(model: AsterWithdrawModel, onRequestReady: ((AsterWithdrawModel) throws -> Data)) async throws -> AsterResponseResultOrError<AsterWithdrawResponse> {
         var _model = model
         let millis = Int(Date().timeIntervalSince1970 * 1000)
         let withdrawNonce = "\(millis)000"
@@ -151,8 +151,7 @@ public class AsterKeyExchange{
         withdrawAction.userSignature = try onRequestReady(_model).toHexString()
         var param = try withdrawAction.payload()
         param["signature"] = self.signature(payload: param)
-        let response: AsterDAPPResponse<AsterWithdrawResponse> = try await self._postAction(request: param, url: url, path: "/fapi/aster/user-withdraw")
-        return response.data
+        return try await self._postAction(request: param, url: url, path: "/fapi/aster/user-withdraw")
     }
     
     public func openOrders(action: AsterOpenOrdersAction) async throws -> [AsterFuturesOrder] {
