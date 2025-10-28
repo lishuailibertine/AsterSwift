@@ -124,6 +124,12 @@ public class AsterKeyExchange{
         return try await self._getActionNokey(request: [:], url: sUrl, path: "/api/v1/aster/withdraw/estimateFee?\(queryString(payload: param, sign: false))")
     }
     
+    public func estimateFee_bapi(action: AsterEstimateFeeAction) async throws -> AsterWithdrawFee{
+        let param = try action.payload()
+        let response: AsterDAPPResponse<AsterWithdrawFee> = try await self._getActionNokey(request: [:], url: dappUrl, path: "/bapi/futures/v1/public/future/aster/estimate-withdraw-fee?\(queryString(payload: param, sign: false))")
+        return response.data
+    }
+    
     public func withdraw(model: AsterWithdrawModel, onRequestReady: ((AsterWithdrawModel) throws -> Data)) async throws -> AsterWithdrawResponse {
         var _model = model
         let millis = Int(Date().timeIntervalSince1970 * 1000)

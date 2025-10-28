@@ -10,6 +10,31 @@ public struct AsterDAPPResponse<T: Decodable>: Decodable {
 public struct AsterResponseError: Decodable {
     public let code: Int
     public let msg: String?
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        if let intCode = try? container.decode(Int.self, forKey: .code) {
+            self.code = intCode
+        }
+        else if let strCode = try? container.decode(String.self, forKey: .code),
+                let intCode = Int(strCode) {
+            self.code = intCode
+        }
+        else {
+            throw DecodingError.typeMismatch(
+                Int.self,
+                DecodingError.Context(
+                    codingPath: decoder.codingPath,
+                    debugDescription: "Expected code to be Int or String convertible to Int"
+                )
+            )
+        }
+        self.msg = try? container.decode(String.self, forKey: .msg)
+    }
+
+    private enum CodingKeys: String, CodingKey {
+        case code
+        case msg
+    }
 }
 
 public enum AsterResponseResultOrError<T: Decodable>: Decodable {
