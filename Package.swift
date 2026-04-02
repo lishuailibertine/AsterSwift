@@ -15,7 +15,7 @@ let package = Package(
             targets: ["AsterSwift"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/mathwallet/web3swift", exact: "3.5.3"),
+        .package(url: "https://github.com/mathwallet/web3swift", exact: "3.5.4"),
         .package(url: "https://github.com/mathwallet/SolanaSwift", exact: "5.1.5"),
         .package(url: "https://github.com/Alamofire/Alamofire.git", exact: "5.9.1")
         
